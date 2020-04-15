@@ -10,4 +10,10 @@ import java.util.UUID;
 public interface CustomerService {
 
     CustomerDto getCustomerDto(UUID id);
+
+    CustomerDto save(CustomerDto customerDto);
+
+    void update(UUID id, CustomerDto customerDto);
+
+    void delete(UUID id);
 }
