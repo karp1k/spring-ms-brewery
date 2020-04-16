@@ -41,7 +41,7 @@ class BeerControllerTest {
     @BeforeEach
     void setUp() {
         beerDto = BeerDto.builder()
-                .beerName("Test")
+              //  .beerName("Test")
                 .beerStyle("test_style")
                 .upc(1L).build();
 
@@ -58,5 +58,13 @@ class BeerControllerTest {
                         .content(beerDtoJson))
                 .andExpect(status()
                         .isCreated());
+    }
+
+    @Test
+    void getBeer() throws Exception {
+        given(beerService.getBeerDto(any())).willReturn(beerDto);
+        String id = UUID.randomUUID().toString();
+        mockMvc.perform(get("/api/v1/beer" + "/" + id))
+                .andExpect(status().isOk());
     }
 }

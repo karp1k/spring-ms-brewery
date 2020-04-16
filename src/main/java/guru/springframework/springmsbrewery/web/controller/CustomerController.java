@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity createCustomer(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity createCustomer(@Valid @RequestBody CustomerDto customerDto) {
         CustomerDto saved = customerService.save(customerDto);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Location", "/api/v1/customer/" + saved.getId().toString());

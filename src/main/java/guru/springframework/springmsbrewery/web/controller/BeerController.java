@@ -5,14 +5,24 @@ import guru.springframework.springmsbrewery.web.services.BeerService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * @author kas
  */
+@Validated
 @Deprecated
 @RestController
 @RequestMapping("/api/v1/beer")
@@ -51,5 +61,8 @@ public class BeerController {
     public void deleteBeer(@PathVariable UUID beerId) {
         beerService.deleteById(beerId);
     }
+
+
+
 
 }
