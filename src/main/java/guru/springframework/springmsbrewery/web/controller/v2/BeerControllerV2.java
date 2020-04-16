@@ -2,6 +2,8 @@ package guru.springframework.springmsbrewery.web.controller.v2;
 
 import guru.springframework.springmsbrewery.web.model.v2.BeerDtoV2;
 import guru.springframework.springmsbrewery.web.services.v2.BeerServiceV2;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +17,13 @@ import java.util.UUID;
 /**
  * @author kas
  */
+@Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/api/v2/beer")
 @RestController
 public class BeerControllerV2 {
 
-    private BeerServiceV2 beerService;
-
-    public BeerControllerV2(BeerServiceV2 beerService) {
-        this.beerService = beerService;
-    }
+    private final BeerServiceV2 beerService;
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDtoV2> getBeer(@PathVariable UUID beerId) {
