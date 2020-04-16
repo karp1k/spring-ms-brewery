@@ -41,7 +41,6 @@ class BeerControllerTest {
     @BeforeEach
     void setUp() {
         beerDto = BeerDto.builder()
-                .id(UUID.randomUUID())
                 .beerName("Test")
                 .beerStyle("test_style")
                 .upc(1L).build();
@@ -51,7 +50,8 @@ class BeerControllerTest {
     @Test
     void handlePost() throws Exception {
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
-        given(beerService.save(any())).willReturn(beerDto);
+        BeerDto savedBeerDto = BeerDto.builder().id(UUID.randomUUID()).build();
+        given(beerService.save(any())).willReturn(savedBeerDto);
         mockMvc
                 .perform(post("/api/v1/beer")
                         .contentType(MediaType.APPLICATION_JSON)
